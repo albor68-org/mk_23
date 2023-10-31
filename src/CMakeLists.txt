@@ -15,6 +15,7 @@ target_link_libraries(${PROJECT_NAME}
       libopencm3
 )
 
+
 set_target_properties(${PROGECT_NAME}
      PROPERTIES
      CXX_STANDART 17
