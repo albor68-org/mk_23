@@ -1,59 +1,20 @@
-<<<<<<< HEAD
 int main()
 {
     while (true )
     {
-//какой-то текст 
-// arm-none-eabi-g++ src/main.cpp -o firmware
+
 
     }
 }
-//  1)_ ctrl+ ё - для открытия терминала  
-//  2) Язык маркдаун - язак разметки 
-//  для создание прошивки нужен кросс компилятор 
-// @@ -64,4 +64,35 @@
-//  3) >
-//  3) >
-// git clone (пишим адресс ) - для клонирования  
-// git clone (пишим адресс ) - для клонирования  
-  
-  
-//   4)(Для отправки лабы на GIT  HUBE нужно ---
-//    |
-//    |
-//    |
-//    |
-//    V
-// 1)Главгая страница 
-//    |
-//    |
-//    |
-//    |
-//    V
-// 2)Copy requests
-// Для работы на вин 
-//  1)скачать  git
-//  2)Нужен кросс компилятор 
-//  3) Make нужен для вин 
-//  4) cmake 
-//  5)arm gcc
-//  6) Программатор (программная часть проограмматора)
-//  7)Редактор или IDE 
- 
-// 31.10.2023
-// 1 ) git pull origin main/ ...->>Pull --- для показа того что находиться в облаке .
-// 2 ) git remote -v  ДЛЯ проверки к каким облачным хранилищам подключен репризиторий 
-// git remote add upstream - для добавление КРАСНОГО репризитория 
-//  git pull upstream meain для синхроназиции с новым репризиторие(upstream) c главной веткой main 
-
-// для подключения платы --  openocd -f board/stm32f3discovery.cfg(конфигурационный файл)
-// для работы с usb  sudo usermod -a -G plugdev 325 (Grop - stud133)
-//  cat /etc/group | grep plug 
-=======
-int main () {
-
-    while (true) {
-
-    }
-}
->>>>>>> edf094cbded313720a30ffb72c3ba40f1f0a0d84
+// cmake --install build
+// cmake --build build
+//  cmake -B build
+//  cmake --install build
+//  git pull upstream  main
+//  sudo apt install nscd
+//  git pull origin main
+//  sudo apt upgrade 
+//  sudo apt update
+//  cat /etc/group | grep plug
+//   sudo usermod -a -G plugdev stud133
+//   sudo openocd -f board/stm32f3discovery.cfg
