@@ -1,10 +1,12 @@
 int main()
 {
+{
     while (true )
     {
 
 
     }
+}
 }
 // cmake --install build
 // cmake --build build

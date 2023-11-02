@@ -1,18 +1,21 @@
+#================================================================================
 cmake_minimum_required(VERSION 3.20)
 set(CMAKE_TOOLCHAIN_FILE cmake/arm-none-eabi-gcc.cmake)
 
 
 
-
+#================================================================================
 project(mk_23 LANGUAGES C CXX ASM)
 set(DEVICE stm32f303vc)
 
 include(libopencm3)
+
+#================================================================================
 add_executable(${PROJECT_NAME} 
    src/main.cpp 
    )
 target_link_libraries(${PROJECT_NAME}
-     libopencm3 )
+     PRIVATE libopencm3 )
 
 set_target_properties(${PROJECT_NAME}
           PROPERTIES 
@@ -23,6 +26,7 @@ set_target_properties(${PROJECT_NAME}
 
 )
 
+#================================================================================
 
 set(PROG stlink)
 string(CONCAT PROG_TARGET ${LOCM3_DEVICE_SERIE} x)
