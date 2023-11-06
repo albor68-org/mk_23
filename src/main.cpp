@@ -18,5 +18,5 @@ int main()
 //  sudo apt upgrade 
 //  sudo apt update
 //  cat /etc/group | grep plug
-//   sudo usermod -a -G plugdev stud133
+//   sudo usermod -a -G plugdev stud133   
 //   sudo openocd -f board/stm32f3discovery.cfg
