@@ -1,0 +1,8 @@
+/home/stud134/projects/mk_23/buid/CMakeFiles/libopencm3_lib.dir
+/home/stud134/projects/mk_23/buid/CMakeFiles/mk_23.dir
+/home/stud134/projects/mk_23/buid/CMakeFiles/edit_cache.dir
+/home/stud134/projects/mk_23/buid/CMakeFiles/rebuild_cache.dir
+/home/stud134/projects/mk_23/buid/CMakeFiles/list_install_components.dir
+/home/stud134/projects/mk_23/buid/CMakeFiles/install.dir
+/home/stud134/projects/mk_23/buid/CMakeFiles/install/local.dir
+/home/stud134/projects/mk_23/buid/CMakeFiles/install/strip.dir
