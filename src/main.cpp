@@ -10,5 +10,6 @@ int main () {
     while (true){
       //  переключение светодиода  
       gpio_toggle(GPIOE, GPIO9);
+       for(volatile uint32_t i=0; i<500'000; ++i);
     }
 }
