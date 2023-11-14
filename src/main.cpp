@@ -8,6 +8,6 @@ int main () {
     while(true) {
     //Переключение светодиода
       gpio_toggle(GPIOE, GPIO8 |GPIO9 |GPIO10 |GPIO11 |GPIO12 |GPIO13 | GPIO14 |GPIO15);
-        
+      for (volatile uint32_t i = 0; i < 300'000; ++i);  
     }
 }
