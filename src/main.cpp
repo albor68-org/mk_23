@@ -1,6 +1,6 @@
 #include <libopencm3/stm32/rcc.h>
 #include <libopencm3/stm32/gpio.h>
-
+#include <libopencm3/stm32/timer.h>
 
 int main () {
 
@@ -10,7 +10,7 @@ int main () {
 // Настройка таймера
     rcc_periph_clock_enable(RCC_TIM6);
     timer_set_prescaler(TIM6, 36000 - 1);
-    time_set_period(TIM6, 1000 - 1);
+    timer_set_period(TIM6, 1000 - 1);
 
     timer_enable_counter(TIM6);
 
