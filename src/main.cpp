@@ -34,7 +34,6 @@ void blink_LED() {
     }
 }
 
-
 int main () {
 
     // Настройка тактов
