@@ -1,27 +1,24 @@
 #include <libopencm3/stm32/rcc.h>
 #include <libopencm3/stm32/gpio.h>
 #include <libopencm3/stm32/timer.h>
-
+#include <libopencm3/cm3/nvic.h>
 constexpr uint16_t LEDS{GPIO9|GPIO13};
 constexpr uint16_t PERIOD_MS{1000};
 
 void setup_LEDS (){
 rcc_periph_clock_enable(RCC_GPIOE);
 
-gpio_mode_setup(GPIOE, GPIO_MODE_OUTPUT, GPIO_PUPD_NONE,GPIO8);
-gpio_mode_setup(GPIOE, GPIO_MODE_OUTPUT, GPIO_PUPD_NONE,GPIO9);
-gpio_mode_setup(GPIOE, GPIO_MODE_OUTPUT, GPIO_PUPD_NONE,GPIO10);
-gpio_mode_setup(GPIOE, GPIO_MODE_OUTPUT, GPIO_PUPD_NONE,GPIO11);
-gpio_mode_setup(GPIOE, GPIO_MODE_OUTPUT, GPIO_PUPD_NONE,GPIO12);
-gpio_mode_setup(GPIOE, GPIO_MODE_OUTPUT, GPIO_PUPD_NONE,GPIO13);
-gpio_mode_setup(GPIOE, GPIO_MODE_OUTPUT, GPIO_PUPD_NONE,GPIO14);
-gpio_mode_setup(GPIOE, GPIO_MODE_OUTPUT, GPIO_PUPD_NONE,GPIO15);
+gpio_mode_setup(GPIOE, GPIO_MODE_OUTPUT, GPIO_PUPD_NONE,LEDS);
+gpio_mode_setup(GPIOE, GPIO_MODE_OUTPUT, GPIO_PUPD_NONE,GPIO11|GPIO15);
+
 }
 
 void setup_timer (){
     rcc_periph_clock_enable(RCC_TIM6);
 timer_set_prescaler(TIM6, rcc_get_timer_clk_freq(TIM6)/PERIOD_MS-1);
 timer_set_period(TIM6, PERIOD_MS-1);
+timer_enable_irq(TIM6, TIM_DIER_UIE);
+nvic_enable_irq(NVIC_TIM6_DAC_IRQ);
 timer_enable_counter(TIM6);
 }
 
@@ -39,11 +36,23 @@ blink_LEDS ();
 setup_timer ();
 
 while (true) {
-       gpio_set(GPIOE, GPIO8|GPIO12);
-       for(volatile uint32_t i=0;i<100'000;++i);
-       gpio_clear(GPIOE, GPIO8|GPIO12);
-       gpio_set(GPIOE, GPIO9|GPIO13);
-       for(volatile uint32_t i=0;i<100'000;++i);
-       gpio_clear(GPIOE, GPIO9|GPIO13);
+    blink_LEDS();
+    //    gpio_set(GPIOE, GPIO8|GPIO12);
+    //    for(volatile uint32_t i=0;i<300'000;++i);
+    //    gpio_clear(GPIOE, GPIO8|GPIO12);
+    //    gpio_set(GPIOE, GPIO9|GPIO13);
+    //    for(volatile uint32_t i=0;i<300'000;++i);
+    //    gpio_clear(GPIOE, GPIO9|GPIO13);
+    //           gpio_set(GPIOE, GPIO10|GPIO14);
+    //    for(volatile uint32_t i=0;i<300'000;++i);
+    //    gpio_clear(GPIOE, GPIO10|GPIO14);
+    //           gpio_set(GPIOE, GPIO11|GPIO15);
+    //    for(volatile uint32_t i=0;i<300'000;++i);
+    //    gpio_clear(GPIOE, GPIO11|GPIO15);
     }
+}
+void tim6_dac_isr () {
+    timer_clear_flag(TIM6, TIM_SR_UIF);
+gpio_toggle(GPIOE, GPIO11 | GPIO15);
+
 }
