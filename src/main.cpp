@@ -2,6 +2,8 @@
 #include <libopencm3/stm32/gpio.h>
 #include <libopencm3/stm32/timer.h>
 
+#include <libopencm3/cm3/nvic.h>
+
 constexpr uint16_t LEDS{GPIO10 | GPIO14};
 
 constexpr uint16_t PERIOD_MS{1000};
@@ -10,6 +12,7 @@ void setup_LEDS () {
     //Настройка для сид
    rcc_periph_clock_enable(RCC_GPIOE);
    gpio_mode_setup(GPIOE, GPIO_MODE_OUTPUT, GPIO_PUPD_NONE, LEDS);
+   gpio_mode_setup(GPIOE, GPIO_MODE_OUTPUT, GPIO_PUPD_NONE, GPIO11 | GPIO13);
 }
 
 void setup_timer () {
@@ -20,7 +23,11 @@ void setup_timer () {
     //Указание предела счета
     timer_set_period(TIM6, PERIOD_MS - 1);
     //Запуск таймера
+    
     timer_enable_counter(TIM6);
+    timer_enable_irq(TIM6, TIM_DIER_UIE);
+
+    nvic_enable_irq(NVIC_TIM6_DAC_IRQ);
 }
 
 void blink_LEDS () {
@@ -40,4 +47,10 @@ int main () {
     while (true) {
         blink_LEDS(); 
     }
+}
+
+void tim6_dac_isr(){
+    timer_clear_flag(TIM6, TIM_SR_UIF);
+    gpio_toggle(GPIOE, GPIO11 | GPIO13);
+
 }
