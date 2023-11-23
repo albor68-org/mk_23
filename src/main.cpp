@@ -11,7 +11,8 @@ void setup_LEDS() {
 }
 void setup_timer() {
     rcc_periph_clock_enable(RCC_TIM6);
-    timer_set_prescaler(TIM6, 32000 - 1);
+
+    timer_set_prescaler(TIM6, rcc_get_timer_clk_freq(TIM6) / PERIOD_MS - 1);
     timer_set_period(TIM6, PERIOD_MS - 1);
     timer_enable_counter(TIM6);
 }
