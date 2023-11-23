@@ -4,38 +4,32 @@
 
 constexpr uint16_t LEDS{GPIO9 | GPIO13};
 
-int main () {
-    //Настрока тактовой подсистемы
-    rcc_clock_setup_pll(&rcc_hsi_configs[RCC_CLOCK_HSI_64MHZ]);
-    
-    //Настройка линий для СИД
+constexpr uint16_t PERIOD_MS{1000};
+
+void setup_LEDS() {
     rcc_periph_clock_enable(RCC_GPIOE);
     gpio_mode_setup(GPIOE, GPIO_MODE_OUTPUT, GPIO_PUPD_NONE, LEDS);
-    gpio_mode_setup(GPIOE, GPIO_MODE_OUTPUT, GPIO_PUPD_NONE, GPIO10 | GPIO14);
-    gpio_mode_setup(GPIOE, GPIO_MODE_OUTPUT, GPIO_PUPD_NONE, GPIO11 | GPIO15);
-    gpio_mode_setup(GPIOE, GPIO_MODE_OUTPUT, GPIO_PUPD_NONE, GPIO12 | GPIO8);
-    
-    //Настройка таймера
-    //Разморозка таймера
-    rcc_periph_clock_enable(RCC_TIM6);
-    //Настройка делителя
-    timer_set_prescaler(TIM6, 32000 - 1);
-    //Указание предела счета
-    timer_set_period(TIM6, 1000 - 1);
-    //Запуск таймера
-    timer_enable_counter(TIM6);
+}
 
-    while (true) {
-        if (timer_get_counter(TIM6) < 500)
+void setup_timer() {
+    rcc_periph_clock_enable(RCC_TIM6);
+    timer_set_prescaler(TIM6, rcc_get_timer_clk_freq(TIM6) - 1);
+    timer_set_period(TIM6, PERIOD_MS - 1);
+    timer_enable_counter(TIM6);
+}
+
+void blink_LEDS() {
+if (timer_get_counter(TIM6) < PERIOD_MS/2)
             gpio_set(GPIOE, LEDS);
         else 
             gpio_clear(GPIOE, LEDS);
-        
-        // gpio_toggle(GPIOE, GPIO10 | GPIO14);
-        // for (volatile uint32_t i=0; i < 100'000; i++);
-        // gpio_toggle(GPIOE, GPIO11 | GPIO15);
-        // for (volatile uint32_t i=0; i < 100'000; i++);
-        // gpio_toggle(GPIOE, GPIO12 | GPIO8);
-        // for (volatile uint32_t i=0; i < 100'000; i++);
+}
+
+int main () {
+    rcc_clock_setup_pll(&rcc_hsi_configs[RCC_CLOCK_HSI_64MHZ]);
+    setup_LEDS();
+    setup_timer();
+    while (true) {
+        blink_LEDS();  
     }
 }
