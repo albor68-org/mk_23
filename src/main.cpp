@@ -27,6 +27,7 @@ void setup_timer ()
     // Указание предела счета
     timer_set_period(TIM6, PERIOD_MS - 1);
 
+
     //Устанавливаем будильник
     timer_enable_irq(TIM6, TIM_DIER_UIE);
     // Просим разрешение у секретаря передать сигнал ЦПУ (nvic)
