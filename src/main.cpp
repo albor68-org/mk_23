@@ -5,7 +5,6 @@
 #include <libopencm3/cm3/nvic.h>
 
 constexpr uint16_t LEDS{GPIO9 | GPIO13};
-
 constexpr uint16_t PERIOD_MS{1000};
 
 void setup_LEDS() {
