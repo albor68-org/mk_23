@@ -7,6 +7,10 @@ constexpr uint16_t LEDS9_13{GPIO9 | GPIO13};
 constexpr uint16_t LEDS10_14{GPIO10 | GPIO14};
 constexpr uint16_t LEDS11_15{GPIO11 | GPIO15};
 
+constexpr uint16_t PERIOD_MS{1000};
+constexpr uint16_t LOCK_FREQ{1000};
+
+
 void setup_LEDS(){
     //Настройка линий для СИДиодов
     rcc_periph_clock_enable(RCC_GPIOE);
@@ -17,27 +21,28 @@ void setup_LEDS(){
 }
 
 void setup_timer(){
-    //Настройка таймера:
     //1) "Разморозка" таймера
     rcc_periph_clock_enable(RCC_TIM6);
     //2) Настройка делителя
-    timer_set_prescaler(TIM6, 32'000 - 1);
+    //половина 64МГц (мы ускоряли систему)
+    //Мы спросили у системы какая у неё частота
+    timer_set_prescaler(TIM6, rcc_get_timer_clk_freq(TIM6) / LOCK_FREQ - 1);
     //3) Указание предела счёта
-    timer_set_period(TIM6, 1000 - 1);
+    timer_set_period(TIM6, PERIOD_MS - 1);
     //4) Запуск таймера
     timer_enable_counter(TIM6);
 }
 
 void blink_LEDS(){
-    if(timer_get_counter(TIM6) < 500){
-            //gpio_set(GPIOE, LEDS8_12);
-            gpio_set(GPIOE, LEDS9_13);
+    if(timer_get_counter(TIM6) < (PERIOD_MS / 2)){
+            gpio_set(GPIOE, LEDS8_12);
+            //gpio_set(GPIOE, LEDS9_13);
             //gpio_set(GPIOE, LEDS10_14);
             //gpio_set(GPIOE, LEDS11_15);
         }
         else{
-            //gpio_clear(GPIOE, LEDS8_12);
-            gpio_clear(GPIOE, LEDS9_13);
+            gpio_clear(GPIOE, LEDS8_12);
+            //gpio_clear(GPIOE, LEDS9_13);
             //gpio_clear(GPIOE, LEDS10_14);
             //gpio_clear(GPIOE, LEDS11_15);
         }
