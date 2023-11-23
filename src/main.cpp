@@ -13,7 +13,7 @@ void setup_timer() {
     //"Разморозка" таймера
     rcc_periph_clock_enable(RCC_TIM6);
     //Настройка делителя
-    timer_set_prescaler(TIM6, 32000 - 1);
+    timer_set_prescaler(TIM6, rcc_get_timer_clk_freq(TIM6) - 1);
     //Указание предела счета
     timer_set_period(TIM6, 1000 - 1);
     //Запуск
@@ -51,12 +51,6 @@ if (timer_get_counter(TIM6) < 500)
         // gpio_toggle(GPIOE, GPIO8);
         // for(volatile uint32_t i = 0; i<900000; i++);
 }
-
-
-
-
-
-
 int main() {
     //НАстройка тактовой подсистемы
     rcc_clock_setup_pll(&rcc_hsi_configs[RCC_CLOCK_HSI_64MHZ]);
