@@ -2,7 +2,9 @@
 #include <libopencm3/stm32/gpio.h>
 #include <libopencm3/stm32/timer.h>
 
-constexpr uint16_t LEDS{GPIO12 | GPIO8};
+#include <libopencm3/cm3/nvic.h>
+
+constexpr uint16_t LEDS{GPIO12 | GPIO15};
 constexpr uint16_t PERIOD_MS{1000};
 
 void setup_LEDS () 
@@ -11,7 +13,7 @@ void setup_LEDS ()
     rcc_periph_clock_enable(RCC_GPIOE);
 
     gpio_mode_setup(GPIOE, GPIO_MODE_OUTPUT, GPIO_PUPD_NONE, LEDS);
-   // gpio_mode_setup(GPIOE, GPIO_MODE_OUTPUT, GPIO_PUPD_NONE, GPIO13);
+    gpio_mode_setup(GPIOE, GPIO_MODE_OUTPUT, GPIO_PUPD_NONE, GPIO9 | GPIO13);
    // gpio_mode_setup(GPIOE, GPIO_MODE_OUTPUT, GPIO_PUPD_NONE, GPIO9);
 }
 
@@ -24,6 +26,13 @@ void setup_timer ()
     timer_set_prescaler(TIM6, rcc_get_timer_clk_freq(TIM6) / PERIOD_MS - 1);
     // Указание предела счета
     timer_set_period(TIM6, PERIOD_MS - 1);
+
+    //Устанавливаем будильник
+    timer_enable_irq(TIM6, TIM_DIER_UIE);
+    // Просим разрешение у секретаря передать сигнал ЦПУ (nvic)
+    nvic_enable_irq(NVIC_TIM6_DAC_IRQ);
+
+
     // Запуск таймера
     timer_enable_counter(TIM6);
 }
@@ -55,4 +64,12 @@ int main ()
     {
         blink_LEDS();
     }
+}
+
+void tim6_dac_isr()
+{
+    //Выключение сигнала будильника
+    timer_clear_flag(TIM6, TIM_SR_UIF);
+    //Включение 2 светодиодов
+     gpio_toggle(GPIOE, GPIO9 | GPIO13);
 }
