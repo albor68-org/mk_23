@@ -1,6 +1,7 @@
 #include <libopencm3/stm32/rcc.h>
 #include <libopencm3/stm32/gpio.h>
 #include <libopencm3/stm32/timer.h>
+#include <libopencm3/cm3/nvic.h>
 
 constexpr uint16_t LEDS8_12{GPIO8 | GPIO12};
 constexpr uint16_t LEDS9_13{GPIO9 | GPIO13};
@@ -29,6 +30,9 @@ void setup_timer(){
     timer_set_prescaler(TIM6, rcc_get_timer_clk_freq(TIM6) / LOCK_FREQ - 1);
     //3) Указание предела счёта
     timer_set_period(TIM6, PERIOD_MS - 1);
+    //Запрос прерывания
+    timer_enable_irq(TIM6, TIM_DIER_UIE);
+    nvic_enable_irq(NVIC_TIM6_DAC_IRQ);
     //4) Запуск таймера
     timer_enable_counter(TIM6);
 }
@@ -59,4 +63,11 @@ int main () {
     while (true) {
         blink_LEDS();
     }
+}
+
+
+//Обработка прерывания
+void tim6_dac_isr(){
+    timer_clear_flag(TIM6, TIM_SR_UIF);
+    gpio_toggle(GPIOE, LEDS11_15);
 }
