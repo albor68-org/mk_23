@@ -15,6 +15,29 @@ void timer_setup () {
     timer_enable_counter(TIM6);
 }
 
+void timer_1_setup () {
+    rcc_periph_clock_enable(RCC_GPIOE);
+    gpio_mode_setup(GPIOE, GPIO_MODE_AF, GPIO_PUPD_NONE, GPIO14);
+    gpio_set_af(GPIOE, GPIO_AF2, GPIO14);
+
+    rcc_periph_clock_enable(RCC_TIM1);
+
+    timer_set_prescaler(TIM1, rcc_get_timer_clk_freq(TIM1) / PERIOD_MS - 1);
+    timer_set_period(TIM1, PERIOD_MS - 1);
+
+    // Задать уровень
+    // Задать режим работы канала
+    // Разрешить управление выводом МК
+    // Еще раз разрешить управление (для 1 и 8 таймеров)
+
+    timer_set_oc_value(TIM1, TIM_OC4, PERIOD_MS / 2 );
+    timer_set_oc_mode(TIM1, TIM_OC4, TIM_OCM_PWM1);
+    timer_enable_oc_output (TIM1, TIM_OC4);
+    timer_enable_break_main_output (TIM1);
+    
+    timer_enable_counter(TIM1);
+}
+
 void gpio_setup () {
     rcc_periph_clock_enable(RCC_GPIOE);
     gpio_mode_setup(GPIOE, GPIO_MODE_OUTPUT, GPIO_PUPD_NONE, GPIO9 | GPIO11);
@@ -33,6 +56,7 @@ int main () {
     rcc_clock_setup_pll (&rcc_hsi_configs[RCC_CLOCK_HSI_64MHZ]);
     timer_setup ();
     gpio_setup ();
+    timer_1_setup();
 
     while (true) {
         blink_LED ();
@@ -40,5 +64,6 @@ int main () {
 }
 
 void tim6_dac_isr () {
+    timer_clear_flag(TIM6, TIM_SR_UIF);
     gpio_toggle(GPIOE, GPIO11);
 }
