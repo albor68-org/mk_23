@@ -46,6 +46,7 @@ if(timer_get_counter(TIM6) < PERIOD_MS / 2) {
     }
     
     void tim6_dac_isr (){
+    timer_clear_flag(TIM6, TIM_SR_UIF);
     gpio_toggle(GPIOE, GPIO11);
 
     }
