@@ -42,6 +42,7 @@ void blink_LED(){
    }
 
 void tim6_dac_isr () {
+    timer_clear_flag(TIM6, TIM_SR_UIF);
     gpio_toggle(GPIOE, GPIO11);
 }
 
