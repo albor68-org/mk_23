@@ -10,7 +10,9 @@ void LED_gpio_setup(){
 // Настройка порта ввода-вывода
 
     rcc_periph_clock_enable(RCC_GPIOE);
-    gpio_mode_setup(GPIOE, GPIO_MODE_OUTPUT, GPIO_PUPD_NONE, GPIO9 | GPIO11 | GPIO14);
+    gpio_mode_setup(GPIOE, GPIO_MODE_OUTPUT, GPIO_PUPD_NONE, GPIO9 | GPIO11 );
+    gpio_mode_setup(GPIOE, GPIO_MODE_AF, GPIO_PUPD_NONE, GPIO14 );
+    gpio_set_af(GPIOE, GPIO_AF2, GPIO14);
 
 }
  
