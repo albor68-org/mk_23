@@ -15,8 +15,10 @@ void blink_LED() {
 
 
 void LED_gpio_setup() {rcc_periph_clock_enable(RCC_GPIOE);
-    gpio_mode_setup(GPIOE, GPIO_MODE_OUTPUT,
-     GPIO_PUPD_NONE, GPIO9 | GPIO11 | GPIO14);
+    gpio_mode_setup(GPIOE, GPIO_MODE_OUTPUT, GPIO_PUPD_NONE, GPIO9 | GPIO11 );
+
+    gpio_mode_setup(GPIOE, GPIO_MODE_ AF, GPIO_PUPD_NONE, GPIO9 | GPIO14 );
+    gpio_SET_AF(GPIOE, GPIO_AF2, GPIO14);
 }
 void timer_setup() {
   rcc_periph_clock_enable(RCC_TIM1);
