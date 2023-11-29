@@ -48,3 +48,4 @@ void tim1_up_tim16_isr(void) {
     timer_clear_flag(TIM1, TIM_SR_UIF);
     gpio_toggle(GPIOE, GPIO11);
 }
+1
