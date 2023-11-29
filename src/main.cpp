@@ -2,7 +2,11 @@
 #include <libopencm3/stm32/gpio.h>
 #include <libopencm3/stm32/timer.h>
 
-constexpr uint16_t PERIOD_MS{10000};
+#include <libopencm3/cm3/nvic.h>
+
+
+
+constexpr uint16_t PERIOD_MS{1000};
 
 
  void blink_LED(){
@@ -23,6 +27,9 @@ void timer_setup() {
 
   timer_set_prescaler(TIM1, rcc_get_timer_clk_freq(TIM1) / (PERIOD_MS - 1));
    timer_set_period(TIM1, PERIOD_MS - 1);
+
+   timer_enable_irq(TIM1, TIM_DIER_UIE);
+nvic_enable_irq(NVIC_TIM1_UP_TIM16_IRQ);
     timer_enable_counter(TIM1);
     
 }
@@ -31,13 +38,14 @@ void timer_setup() {
 
 //-----------------------------------------------------------
 int main () {
-  timer_setup();
+  
 
 
      // Настройка тактовой подсиситемы
       rcc_clock_setup_pll(&rcc_hsi_configs[RCC_CLOCK_HSI_64MHZ]);
       
 LED_gpio_setup();
+timer_setup();
 
  while (true){
       //  переключение светодиода  
@@ -45,4 +53,12 @@ LED_gpio_setup();
       //for(volatile uint32_t i=0; i<500'000; ++i);
       blink_LED();
     }
+
 }
+void tim1_up_tim16_isr (void){
+  timer_clear_flag(TIM1, TIM_SR_UIF);
+  gpio_toggle(GPIOE, GPIO11);
+
+}
+
+
