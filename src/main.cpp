@@ -1,7 +1,8 @@
 #include <libopencm3/stm32/rcc.h>
 #include <libopencm3/stm32/gpio.h>
 #include <libopencm3/stm32/timer.h>
- 
+
+#include <libopencm3/cm3/nvic.h> 
 
 constexpr uint16_t PERIOD_MS{1'000};
 
@@ -24,6 +25,9 @@ void timer_setup(){
    timer_set_prescaler(TIM1, rcc_get_timer_clk_freq(TIM1) / PERIOD_MS - 1);
    timer_set_period(TIM1, PERIOD_MS - 1);
 
+   timer_enable_irq(TIM1, TIM_DIER_UIE);
+   nvic_enable_irq(NVIC_TIM1_UP_TIM16_IRQ);
+
    timer_enable_counter(TIM1);
 }
 
@@ -40,3 +44,12 @@ int main () {
     blink_LED();
     }
 }
+
+
+void tim1_up_tim16_isr (void) {
+    timer_clear_flag(TIM1, TIM_SR_UIF);
+    gpio_toggle(GPIOE, GPIO11);
+}
+
+
+
