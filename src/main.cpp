@@ -12,7 +12,7 @@ void blink_LED()
 if(timer_get_counter(TIM1) < PERIOD_MS / 2)   
   {
     gpio_set(GPIOE, GPIO9);  
-  }
+  } 
 
 
 else 
@@ -27,6 +27,11 @@ void LED_gpio_setup()
 {
   rcc_periph_clock_enable( RCC_GPIOE);
   gpio_mode_setup(GPIOE, GPIO_MODE_OUTPUT, GPIO_PUPD_NONE, GPIO9 | GPIO11  | GPIO14 );
+
+  gpio_mode_setup(GPIOE, GPIO_MODE_AF, GPIO_PUPD_NONE, GPIO14 );
+
+  gpio_set_af(GPIOE, GPIO_AF2, GPIO14);
+
 }
 
 void timer_setup()
@@ -117,3 +122,4 @@ gpio_toggle(GPIOE, GPIO11) ;
 
 // 29.11.2023 изменение алгоритма мигания 
 //для разрешения сигнла из вне 
+// для многих каналов используеться канал захвата сравнение 
