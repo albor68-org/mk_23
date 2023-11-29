@@ -2,6 +2,9 @@
 #include <libopencm3/stm32/gpio.h>
 #include <libopencm3/stm32/timer.h>
 
+
+#include <libopencm3/cm3/nvic.h> //заголовок для перерывааний находиться в другой папке 
+
 constexpr uint16_t PERIOD_MS{1000};
 
 void blink_LED() 
@@ -31,8 +34,16 @@ void timer_setup()
   rcc_periph_clock_enable( RCC_TIM1);
   timer_set_prescaler (TIM1, rcc_get_timer_clk_freq(TIM1) / PERIOD_MS -1  );
   timer_set_period(TIM1, PERIOD_MS-1);
+
+//для разрешения беспокойства процессора 
+  timer_enable_irq(TIM1, TIM_DIER_UIE);
+  nvic_enable_irq (NVIC_TIM1_UP_TIM16_IRQ ); 
+
   timer_enable_counter(TIM1);
 }
+
+
+
 
 int main()
 { //  насттройка порта ввода-вывода 
@@ -68,6 +79,21 @@ timer_setup();
   }
 
 }
+
+
+
+void tim1_up_tim16_isr(void)  //обработчик  
+{
+
+timer_clear_flag(TIM1, TIM_SR_UIF); // снимаем заброс или выключаем будильник.  TIM_SR_UIF- для обнуленяи
+//полезная работа те переключение сетодиода  
+gpio_toggle(GPIOE, GPIO11) ;
+}
+
+
+
+
+
 // hsi - hight speed internal когда появляется кварц 
 // uint32_t---жёсткое приивание разрядности для МК
 // cmake --install build --- для загрузки на плату прокта 
@@ -89,4 +115,5 @@ timer_setup();
 //    2. написать программу сохранить и сначала вцыполонить cmake --build build, а потом ,  cmake --install build
 
 
-// 28.11.2023 изменение алгоритма мигания 
+// 29.11.2023 изменение алгоритма мигания 
+//для разрешения сигнла из вне 
