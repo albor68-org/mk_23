@@ -11,18 +11,23 @@ void setup_LEDS() {
     gpio_mode_setup(GPIOE, GPIO_MODE_OUTPUT, GPIO_PUPD_NONE, LEDS);
     gpio_mode_setup(GPIOE, GPIO_MODE_OUTPUT, GPIO_PUPD_NONE, GPIO11 | GPIO15);
 }
-void setup_timer() {
+void setup_timer_1() {
 //Настройка таймера
     //"Разморозка" таймера
-    rcc_periph_clock_enable(RCC_TIM6);
+    rcc_periph_clock_enable(RCC_TIM1);
     //Настройка делителя
     timer_set_prescaler(TIM6, rcc_get_timer_clk_freq(TIM6) / PERIOD_MS - 1);
     //Указание предела счета
     timer_set_period(TIM6, PERIOD_MS - 1);
+
+    timer_set_oc_value(TIM1, TIM1_OC1, PERIOD_MS / 3);
+    timer_set_oc_mode(TIM1, TIM1_OC1, TIM_OCM_PWM1);
+    timer_enable_oc_output(TIM6, TIM_OC1);
+
+    timer_enable_break_main_output(TIM1);
+
     //Запуск
-    timer_enable_irq(TIM6, TIM_DIER_UIE);
-    nvic_enable_irq(NVIC_TIM6_DAC_IRQ);
-    timer_enable_counter(TIM6);
+    timer_enable_counter(TIM1);
 }
 void setup_blink() {
 if (timer_get_counter(TIM6) < PERIOD_MS / 2)
@@ -67,6 +72,10 @@ int main() {
     rcc_clock_setup_pll(&rcc_hsi_configs[RCC_CLOCK_HSI_64MHZ]);
     setup_LEDS();
     setup_timer();
+
+    setup_timer_1();
+    setup_timer_port();
+
     while (true) {
 
         setup_blink();
