@@ -22,6 +22,17 @@ nvic_enable_irq(NVIC_TIM6_DAC_IRQ);
 timer_enable_counter(TIM6);
 }
 
+void setup_timer_1 (){
+    rcc_periph_clock_enable(RCC_TIM1);
+timer_set_prescaler(TIM1, rcc_get_timer_clk_freq(TIM1)/PERIOD_MS-1);
+timer_set_period(TIM1, PERIOD_MS-1);
+timer_set_oc_value(TIM1, TIM_OC1, PERIOD_MS /3);
+timer_set_oc_mode(TIM1, TIM_OC1, TIM_OCM_PWM1);
+timer_enable_oc_output(TIM1, TIM_OC1);
+timer_enable_break_main_output(TIM1);
+timer_enable_counter(TIM1);
+}
+
 void blink_LEDS (){
 if (timer_get_counter(TIM6)<PERIOD_MS/2)
 gpio_set(GPIOE,LEDS);
@@ -34,6 +45,8 @@ int main () {
 setup_LEDS ();
 blink_LEDS ();
 setup_timer ();
+setup_timer_1 ();
+// setup_timer_port ();
 
 while (true) {
     blink_LEDS();
