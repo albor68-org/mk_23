@@ -28,7 +28,7 @@ void setup_timer ()
     timer_set_period(TIM6, PERIOD_MS - 1);
 
 
-    //Устанавливаем будильник
+    // Устанавливаем будильник
     timer_enable_irq(TIM6, TIM_DIER_UIE);
     // Просим разрешение у секретаря передать сигнал ЦПУ (nvic)
     nvic_enable_irq(NVIC_TIM6_DAC_IRQ);
@@ -36,6 +36,27 @@ void setup_timer ()
 
     // Запуск таймера
     timer_enable_counter(TIM6);
+}
+
+void setup_timer_1 () 
+{
+    // Настройка таймера
+    // "Разморозка" таймера
+    rcc_periph_clock_enable(RCC_TIM1);
+    // Настройка делителя
+    timer_set_prescaler(TIM1, rcc_get_timer_clk_freq(TIM1) / PERIOD_MS - 1);
+    // Указание предела счета
+    timer_set_period(TIM1, PERIOD_MS - 1);
+    
+    timer_set_oc_value(TIM1, TIM_OC1, PERIOD_MS / 3);
+    timer_set_oc_mode(TIM1, TIM_OC1, TIM_OCM_PWM1);
+
+    timer_enable_oc_output(TIM, TIM_OC1);
+
+    timer_enable_break_main_output(TIM1);
+
+    // Запуск таймера
+    timer_enable_counter(TIM1);
 }
 
 void blink_LEDS () 
@@ -61,6 +82,10 @@ int main ()
 
     setup_timer();
 
+    // Для того, чтобы СИДом управлял таймер, необходимо настроить таймер и линию порта
+    setup_timer_1();
+    setup_timer_port();
+
     while (true) 
     {
         blink_LEDS();
@@ -71,6 +96,7 @@ void tim6_dac_isr()
 {
     //Выключение сигнала будильника
     timer_clear_flag(TIM6, TIM_SR_UIF);
-    //Включение 2 светодиодов
+    //Включение 2-х светодиодов
      gpio_toggle(GPIOE, GPIO9 | GPIO13);
 }
+
