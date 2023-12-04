@@ -21,29 +21,44 @@ nvic_enable_irq(NVIC_TIM6_DAC_IRQ);
 timer_enable_counter(TIM6);
 
 }
-void blink_LEDS () {
-if (timer_get_counter(TIM6)<PERIOD_MS/2)
-gpio_set(GPIOE,LEDS);
-else
-gpio_clear(GPIOE,LEDS);
-    
+void setup_timer_1 () {
+    rcc_periph_clock_enable(RCC_TIM1);
+    timer_set_prescaler(TIM1,rcc_get_timer_clk_freq(TIM1)/PERIOD_MS-1);
+timer_set_period(TIM1,PERIOD_MS-1 );
+timer_set_oc_value(TIM1,TIM_OC1,PERIOD_MS /3);
+timer_set_oc_mode(TIM1,TIM_OC1,TIM_OCM_PWM1);
+timer_enable_oc_output(TIM1,TIM_OC1);
+timer_enable_break_main_output(TIM1);
+timer_enable_counter(TIM1);
+
 }
+// void blink_LEDS () {
+// if (timer_get_counter(TIM6)<PERIOD_MS/2)
+// gpio_set(GPIOE,LEDS);
+// else
+// gpio_clear(GPIOE,LEDS);
+    
+// }
 
 int main () {
 rcc_clock_setup_pll(&rcc_hsi_configs[RCC_CLOCK_HSI_64MHZ]);
 setup_LEDS();
 setup_timer();
-blink_LEDS();
-    while (true) { 
+//для того, чтобы  СИДом управлял таймер,необходимо настроить таймер и линию порта
+setup_timer_1();
+// setup_timer_port();
 
-gpio_set(GPIOE, GPIO9 | GPIO13 );
-for(volatile uint32_t i=0;i<350'000; ++i);
-gpio_clear(GPIOE,GPIO9 | GPIO13 );
-gpio_set(GPIOE, GPIO8|GPIO12 );
-for(volatile uint32_t i=0;i<350'000; ++i);
-gpio_clear(GPIOE,GPIO8 |GPIO12 );
+// blink_LEDS();
+//     while (true) { 
+
+// gpio_set(GPIOE, GPIO9 | GPIO13 );
+// for(volatile uint32_t i=0;i<350'000; ++i);
+// gpio_clear(GPIOE,GPIO9 | GPIO13 );
+// gpio_set(GPIOE, GPIO8|GPIO12 );
+// for(volatile uint32_t i=0;i<350'000; ++i);
+// gpio_clear(GPIOE,GPIO8 |GPIO12 );
   
-   }
+//    }
 }
 
 void tim6_dac_isr(){
