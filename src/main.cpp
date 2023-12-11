@@ -51,13 +51,21 @@ void setup_timer_1 ()
     timer_set_oc_value(TIM1, TIM_OC1, PERIOD_MS / 3);
     timer_set_oc_mode(TIM1, TIM_OC1, TIM_OCM_PWM1);
 
-    timer_enable_oc_output(TIM, TIM_OC1);
+    timer_enable_oc_output(TIM1, TIM_OC1);
 
     timer_enable_break_main_output(TIM1);
 
     // Запуск таймера
     timer_enable_counter(TIM1);
 }
+
+void setup_timer_port()
+{
+    rcc_periph_clock_enable(RCC_GPIOE);
+    gpio_mode_setup(GPIOE, GPIO_MODE_AF, GPIO_PUPD_NONE, GPIO9);
+    gpio_set_af(GPIOE, GPIO_AF2, GPIO9);
+}
+
 
 void blink_LEDS () 
 {
