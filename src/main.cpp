@@ -8,8 +8,8 @@ constexpr uint16_t LEDS9_13{GPIO9 | GPIO13};
 constexpr uint16_t LEDS10_14{GPIO10 | GPIO14};
 constexpr uint16_t LEDS11_15{GPIO11 | GPIO15};
 
-constexpr uint16_t PERIOD_MS{1000};
-constexpr uint16_t LOCK_FREQ{1000};
+constexpr uint16_t PERIOD_MS{40};
+constexpr uint16_t LOCK_FREQ_HZ{1000};
 
 
 void setup_LEDS(){
@@ -27,7 +27,7 @@ void setup_timer(){
     //2) Настройка делителя
     //половина 64МГц (мы ускоряли систему)
     //Мы спросили у системы какая у неё частота
-    timer_set_prescaler(TIM6, rcc_get_timer_clk_freq(TIM6) / LOCK_FREQ - 1);
+    timer_set_prescaler(TIM6, rcc_get_timer_clk_freq(TIM6) / LOCK_FREQ_HZ - 1);
     //3) Указание предела счёта
     timer_set_period(TIM6, PERIOD_MS - 1);
     //Запрос прерывания
@@ -43,11 +43,11 @@ void setup_timer_1(){
     //2) Настройка делителя
     //половина 64МГц (мы ускоряли систему)
     //Мы спросили у системы какая у неё частота
-    timer_set_prescaler(TIM1, rcc_get_timer_clk_freq(TIM1) / LOCK_FREQ - 1);
+    timer_set_prescaler(TIM1, rcc_get_timer_clk_freq(TIM1) / LOCK_FREQ_HZ - 1);
     //3) Указание предела счёта
     timer_set_period(TIM1, PERIOD_MS - 1);
     
-    timer_set_oc_value(TIM1, TIM_OC1, PERIOD_MS / 3);
+    timer_set_oc_value(TIM1, TIM_OC1, PERIOD_MS * 3 / 4);
     timer_set_oc_mode(TIM1, TIM_OC1, TIM_OCM_PWM1);
     timer_enable_oc_output(TIM1, TIM_OC1);
 
@@ -57,6 +57,12 @@ void setup_timer_1(){
     timer_enable_counter(TIM1);
 }
 
+void setup_timer_port(){
+    //Настройка линий для СИДиодов
+    rcc_periph_clock_enable(RCC_GPIOE);
+    gpio_mode_setup(GPIOE, GPIO_MODE_AF, GPIO_PUPD_NONE, GPIO9);
+    gpio_set_af(GPIOE, GPIO_AF2, GPIO9);
+}
 
 void blink_LEDS(){
     if(timer_get_counter(TIM6) < (PERIOD_MS / 2)){
@@ -95,4 +101,9 @@ int main () {
 void tim6_dac_isr(){
     timer_clear_flag(TIM6, TIM_SR_UIF);
     gpio_toggle(GPIOE, LEDS11_15);
+
+    static uint8_t rep{0};
+    rep++;
+    rep %= 4;
+    if(rep == 0)timer_set_oc_value(TIM1, TIM_OC1, PERIOD_MS / (rep + 2));
 }
