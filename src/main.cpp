@@ -105,5 +105,10 @@ void tim6_dac_isr(){
     static uint8_t rep{0};
     rep++;
     rep %= 4;
-    if(rep == 0)timer_set_oc_value(TIM1, TIM_OC1, PERIOD_MS / (rep + 2));
+    if(rep == 0){
+        static uint8_t rep2{0};
+        rep2++;
+        rep2 %= 5;
+        timer_set_oc_value(TIM1, TIM_OC1, PERIOD_MS / (rep2 + 2));
+        }
 }
