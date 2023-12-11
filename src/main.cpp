@@ -31,13 +31,21 @@ if (timer_get_counter(TIM6) < PERIOD_MS/2)
 
 void setup_timer_1() {
     rcc_periph_clock_enable(RCC_TIM1);
+
     timer_set_prescaler(TIM1, rcc_get_timer_clk_freq(TIM1)/PERIOD_MS - 1);
     timer_set_period(TIM1, PERIOD_MS - 1);
+
     timer_set_oc_value(TIM1, TIM_OC1, PERIOD_MS/3);
-    timer_set_oc_mode(TIM1, TIM_OC1, TIM_OCM_RWM1);
+    timer_set_oc_mode(TIM1, TIM_OC1, TIM_OCM_PWM1);
     timer_enable_oc_output(TIM1, TIM_OC1);
     timer_enable_break_main_output(TIM1);
     timer_enable_counter(TIM1);
+}
+
+void setup_timer_port(){
+    rcc_periph_clock_enable(RCC_GPIOE);
+    gpio_mode_setup(GPIOE, GPIO_MODE_AF, GPIO_PUPD_NONE, GPIO9);
+    gpio_set_af(GPIOE, GPIO_AF2, GPIO9);
 }
 
 int main () {
