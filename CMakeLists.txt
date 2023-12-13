@@ -34,4 +34,3 @@ string(CONCAT PROG_TARGET ${LOCM3_DEVICE_SERIE} x)
 include(oocd_flash_script)
 
 install(CODE ${OOCD_FLASH_SCRIPT})
-
