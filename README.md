@@ -11,7 +11,7 @@
 
 Настройка проекта: 
     cmake -B build
-Сборка проекта 
+Сборка проекта:
     cmake --build build     
-Прошивка МК 
-    cmake --install boild 
+Прошивка МК:
+    cmake --install build 
