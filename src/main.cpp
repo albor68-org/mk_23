@@ -8,7 +8,7 @@ constexpr uint16_t LEDS9_13{GPIO9 | GPIO13};
 constexpr uint16_t LEDS10_14{GPIO10 | GPIO14};
 constexpr uint16_t LEDS11_15{GPIO11 | GPIO15};
 
-constexpr uint16_t PERIOD_MS{40};
+constexpr uint16_t PERIOD_MS{140};
 constexpr uint16_t LOCK_FREQ_HZ{1000};
 
 
