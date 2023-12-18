@@ -5,8 +5,8 @@
 
 
 constexpr uint16_t LEDS{GPIO9|GPIO13|GPIO8|GPIO12};
-constexpr uint16_t CNT_FREQ_HZ{1000};
-constexpr uint16_t PERIOD_MS{20};
+constexpr uint16_t CNT_FREQ_HZ{100};
+constexpr uint16_t PERIOD_MS{100};
 void setup_LEDS () {
     rcc_periph_clock_enable(RCC_GPIOE);
 
@@ -59,7 +59,7 @@ setup_timer_port();
     while (true) { 
 // blink_LEDS();
 // gpio_set(GPIOE, GPIO9 | GPIO13 );
-// for(volatile uint32_t i=0;i<350'000; ++i);
+// for(volatile uint32_t i=0;i<550'000; ++i);
 // gpio_clear(GPIOE,GPIO9 | GPIO13 );
 // gpio_set(GPIOE, GPIO8|GPIO12 );
 // for(volatile uint32_t i=0;i<350'000; ++i);
