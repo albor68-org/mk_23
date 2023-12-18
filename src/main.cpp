@@ -103,7 +103,7 @@ int main() {
 void tim6_dac_isr(){
 
     timer_clear_flag(TIM6, TIM_SR_UIF);
-    gpio_toggle(GPIOE, GPIO11 | GPIO15);
+    gpio_toggle(GPIOE, GPIO10 | GPIO12 | GPIO14 | GPIO8);
 
     static uint8_t rep{0};
     rep++;
@@ -115,3 +115,4 @@ void tim6_dac_isr(){
     timer_set_oc_value(TIM1, TIM_OC1, PERIOD_MS / (rep2 + 1));
     }
 }
+
