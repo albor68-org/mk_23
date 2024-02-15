@@ -23,6 +23,9 @@ usart_enable(USART1);
 
 }
 void loop () {
+    
+    uint8_t c = usart_recv_blocking(USART1);
+
     usart_send_blocking(USART1, 'H');
     usart_send_blocking(USART1, 'E');
     usart_send_blocking(USART1, 'L');
