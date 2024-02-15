@@ -1,0 +1,8 @@
+/home/stud133/Romanyuk133/Progects2/mk_23/Build/CMakeFiles/libopencm3_lib.dir
+/home/stud133/Romanyuk133/Progects2/mk_23/Build/CMakeFiles/mk_23.dir
+/home/stud133/Romanyuk133/Progects2/mk_23/Build/CMakeFiles/edit_cache.dir
+/home/stud133/Romanyuk133/Progects2/mk_23/Build/CMakeFiles/rebuild_cache.dir
+/home/stud133/Romanyuk133/Progects2/mk_23/Build/CMakeFiles/list_install_components.dir
+/home/stud133/Romanyuk133/Progects2/mk_23/Build/CMakeFiles/install.dir
+/home/stud133/Romanyuk133/Progects2/mk_23/Build/CMakeFiles/install/local.dir
+/home/stud133/Romanyuk133/Progects2/mk_23/Build/CMakeFiles/install/strip.dir

@@ -1,0 +1,26 @@
+CMakeFiles/mk_23.dir/src/main.cpp.obj: \
+ /home/stud133/Romanyuk133/Progects2/mk_23/src/main.cpp \
+ /home/stud133/Romanyuk133/Progects2/mk_23/Build/_deps/libopencm3_repo-src/include/libopencm3/stm32/rcc.h \
+ /home/stud133/Romanyuk133/Progects2/mk_23/Build/_deps/libopencm3_repo-src/include/libopencm3/cm3/common.h \
+ /usr/lib/gcc/arm-none-eabi/10.3.1/include/stdint.h \
+ /usr/lib/gcc/arm-none-eabi/10.3.1/include/stdbool.h \
+ /home/stud133/Romanyuk133/Progects2/mk_23/Build/_deps/libopencm3_repo-src/include/libopencm3/stm32/memorymap.h \
+ /home/stud133/Romanyuk133/Progects2/mk_23/Build/_deps/libopencm3_repo-src/include/libopencm3/stm32/f3/memorymap.h \
+ /home/stud133/Romanyuk133/Progects2/mk_23/Build/_deps/libopencm3_repo-src/include/libopencm3/cm3/memorymap.h \
+ /home/stud133/Romanyuk133/Progects2/mk_23/Build/_deps/libopencm3_repo-src/include/libopencm3/stm32/f3/rcc.h \
+ /home/stud133/Romanyuk133/Progects2/mk_23/Build/_deps/libopencm3_repo-src/include/libopencm3/stm32/common/rcc_common_all.h \
+ /home/stud133/Romanyuk133/Progects2/mk_23/Build/_deps/libopencm3_repo-src/include/libopencm3/stm32/gpio.h \
+ /home/stud133/Romanyuk133/Progects2/mk_23/Build/_deps/libopencm3_repo-src/include/libopencm3/stm32/f3/gpio.h \
+ /home/stud133/Romanyuk133/Progects2/mk_23/Build/_deps/libopencm3_repo-src/include/libopencm3/stm32/common/gpio_common_f234.h \
+ /home/stud133/Romanyuk133/Progects2/mk_23/Build/_deps/libopencm3_repo-src/include/libopencm3/stm32/common/gpio_common_all.h \
+ /home/stud133/Romanyuk133/Progects2/mk_23/Build/_deps/libopencm3_repo-src/include/libopencm3/stm32/timer.h \
+ /home/stud133/Romanyuk133/Progects2/mk_23/Build/_deps/libopencm3_repo-src/include/libopencm3/stm32/f3/timer.h \
+ /home/stud133/Romanyuk133/Progects2/mk_23/Build/_deps/libopencm3_repo-src/include/libopencm3/stm32/common/timer_common_f24.h \
+ /home/stud133/Romanyuk133/Progects2/mk_23/Build/_deps/libopencm3_repo-src/include/libopencm3/stm32/common/timer_common_all.h \
+ /home/stud133/Romanyuk133/Progects2/mk_23/Build/_deps/libopencm3_repo-src/include/libopencm3/cm3/nvic.h \
+ /home/stud133/Romanyuk133/Progects2/mk_23/Build/_deps/libopencm3_repo-src/include/libopencm3/dispatch/nvic.h \
+ /home/stud133/Romanyuk133/Progects2/mk_23/Build/_deps/libopencm3_repo-src/include/libopencm3/stm32/f3/nvic.h \
+ /home/stud133/Romanyuk133/Progects2/mk_23/Build/_deps/libopencm3_repo-src/include/libopencm3/stm32/usart.h \
+ /home/stud133/Romanyuk133/Progects2/mk_23/Build/_deps/libopencm3_repo-src/include/libopencm3/stm32/f3/usart.h \
+ /home/stud133/Romanyuk133/Progects2/mk_23/Build/_deps/libopencm3_repo-src/include/libopencm3/stm32/common/usart_common_all.h \
+ /home/stud133/Romanyuk133/Progects2/mk_23/Build/_deps/libopencm3_repo-src/include/libopencm3/stm32/common/usart_common_v2.h
