@@ -15,13 +15,6 @@ CMakeFiles/mk_23.dir/src/main.cpp.obj: ../src/main.cpp \
   _deps/libopencm3_repo-src/include/libopencm3/stm32/f3/gpio.h \
   _deps/libopencm3_repo-src/include/libopencm3/stm32/common/gpio_common_f234.h \
   _deps/libopencm3_repo-src/include/libopencm3/stm32/common/gpio_common_all.h \
-  _deps/libopencm3_repo-src/include/libopencm3/stm32/timer.h \
-  _deps/libopencm3_repo-src/include/libopencm3/stm32/f3/timer.h \
-  _deps/libopencm3_repo-src/include/libopencm3/stm32/common/timer_common_f24.h \
-  _deps/libopencm3_repo-src/include/libopencm3/stm32/common/timer_common_all.h \
-  _deps/libopencm3_repo-src/include/libopencm3/cm3/nvic.h \
-  _deps/libopencm3_repo-src/include/libopencm3/dispatch/nvic.h \
-  _deps/libopencm3_repo-src/include/libopencm3/stm32/f3/nvic.h \
   _deps/libopencm3_repo-src/include/libopencm3/stm32/usart.h \
   _deps/libopencm3_repo-src/include/libopencm3/stm32/f3/usart.h \
   _deps/libopencm3_repo-src/include/libopencm3/stm32/common/usart_common_all.h \
@@ -32,27 +25,15 @@ _deps/libopencm3_repo-src/include/libopencm3/stm32/common/usart_common_v2.h:
 
 _deps/libopencm3_repo-src/include/libopencm3/stm32/f3/usart.h:
 
-_deps/libopencm3_repo-src/include/libopencm3/cm3/nvic.h:
-
-_deps/libopencm3_repo-src/include/libopencm3/stm32/common/timer_common_all.h:
-
-_deps/libopencm3_repo-src/include/libopencm3/stm32/f3/timer.h:
-
 ../src/main.cpp:
 
 _deps/libopencm3_repo-src/include/libopencm3/stm32/common/usart_common_all.h:
 
 _deps/libopencm3_repo-src/include/libopencm3/stm32/rcc.h:
 
-_deps/libopencm3_repo-src/include/libopencm3/stm32/f3/nvic.h:
-
 _deps/libopencm3_repo-src/include/libopencm3/stm32/f3/memorymap.h:
 
-_deps/libopencm3_repo-src/include/libopencm3/stm32/timer.h:
-
 _deps/libopencm3_repo-src/include/libopencm3/cm3/common.h:
-
-_deps/libopencm3_repo-src/include/libopencm3/dispatch/nvic.h:
 
 _deps/libopencm3_repo-src/include/libopencm3/stm32/common/gpio_common_all.h:
 
@@ -63,8 +44,6 @@ _deps/libopencm3_repo-src/include/libopencm3/stm32/gpio.h:
 /usr/lib/gcc/arm-none-eabi/10.3.1/include/stdint.h:
 
 _deps/libopencm3_repo-src/include/libopencm3/stm32/memorymap.h:
-
-_deps/libopencm3_repo-src/include/libopencm3/stm32/common/timer_common_f24.h:
 
 _deps/libopencm3_repo-src/include/libopencm3/cm3/memorymap.h:
 
