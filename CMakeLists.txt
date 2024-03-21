@@ -4,7 +4,7 @@ set(CMAKE_TOOLCHAIN_FILE cmake/arm-none-eabi-gcc.cmake)
 
 
 #================================================================================
-project(mk_23 LANGUAGES CXX C ASM)
+project(mk_24 LANGUAGES CXX C ASM)
 set(DEVICE stm32f303vc)
 
 include(libopencm3)
@@ -13,7 +13,11 @@ include(libopencm3)
 #================================================================================
 add_executable(${PROJECT_NAME}
      src/main.cpp
+     ring_buff/buff.cpp
 )
+
+target_include_directories(${PROJECT_NAME}
+PRIVATE ${CMAKE_CURRENT_LIST_DIR})
 
 target_link_libraries(${PROJECT_NAME}
      PRIVATE libopencm3
