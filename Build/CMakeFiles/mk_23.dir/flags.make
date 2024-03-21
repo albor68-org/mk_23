@@ -4,7 +4,7 @@
 # compile CXX with /usr/bin/arm-none-eabi-g++
 CXX_DEFINES = -DSTM32F3 -DSTM32F3CCM -DSTM32F303VC
 
-CXX_INCLUDES = -I/home/stud133/Romanyuk133/Progects2/mk_23/Build/_deps/libopencm3_repo-src/include
+CXX_INCLUDES = -I/home/stud133/Romanyuk133/Progects2/mk_23 -I/home/stud133/Romanyuk133/Progects2/mk_23/Build/_deps/libopencm3_repo-src/include
 
 CXX_FLAGS = -ggdb3 -Os -fdata-sections -ffunction-sections -fno-common -fno-exceptions -Wall -Wextra -Wshadow -Wdouble-promotion -Wundef -Wconversion -mcpu=cortex-m4 -mthumb -mfpu=fpv4-sp-d16 -mfloat-abi=hard -std=c++17
 

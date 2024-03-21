@@ -187,6 +187,30 @@ mk_23/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/mk_23.dir/build.make CMakeFiles/mk_23.dir/build
 .PHONY : mk_23/fast
 
+ring_buf/ring_buf.obj: ring_buf/ring_buf.cpp.obj
+.PHONY : ring_buf/ring_buf.obj
+
+# target to build an object file
+ring_buf/ring_buf.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/mk_23.dir/build.make CMakeFiles/mk_23.dir/ring_buf/ring_buf.cpp.obj
+.PHONY : ring_buf/ring_buf.cpp.obj
+
+ring_buf/ring_buf.i: ring_buf/ring_buf.cpp.i
+.PHONY : ring_buf/ring_buf.i
+
+# target to preprocess a source file
+ring_buf/ring_buf.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/mk_23.dir/build.make CMakeFiles/mk_23.dir/ring_buf/ring_buf.cpp.i
+.PHONY : ring_buf/ring_buf.cpp.i
+
+ring_buf/ring_buf.s: ring_buf/ring_buf.cpp.s
+.PHONY : ring_buf/ring_buf.s
+
+# target to generate assembly for a file
+ring_buf/ring_buf.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/mk_23.dir/build.make CMakeFiles/mk_23.dir/ring_buf/ring_buf.cpp.s
+.PHONY : ring_buf/ring_buf.cpp.s
+
 src/main.obj: src/main.cpp.obj
 .PHONY : src/main.obj
 
@@ -225,6 +249,9 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... libopencm3_lib"
 	@echo "... mk_23"
+	@echo "... ring_buf/ring_buf.obj"
+	@echo "... ring_buf/ring_buf.i"
+	@echo "... ring_buf/ring_buf.s"
 	@echo "... src/main.obj"
 	@echo "... src/main.i"
 	@echo "... src/main.s"

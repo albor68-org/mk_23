@@ -8,6 +8,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
+  "/home/stud133/Romanyuk133/Progects2/mk_23/ring_buf/ring_buf.cpp" "CMakeFiles/mk_23.dir/ring_buf/ring_buf.cpp.obj" "gcc" "CMakeFiles/mk_23.dir/ring_buf/ring_buf.cpp.obj.d"
   "/home/stud133/Romanyuk133/Progects2/mk_23/src/main.cpp" "CMakeFiles/mk_23.dir/src/main.cpp.obj" "gcc" "CMakeFiles/mk_23.dir/src/main.cpp.obj.d"
   )
 

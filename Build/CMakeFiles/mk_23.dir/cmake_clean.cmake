@@ -1,4 +1,6 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/mk_23.dir/ring_buf/ring_buf.cpp.obj"
+  "CMakeFiles/mk_23.dir/ring_buf/ring_buf.cpp.obj.d"
   "CMakeFiles/mk_23.dir/src/main.cpp.obj"
   "CMakeFiles/mk_23.dir/src/main.cpp.obj.d"
   "mk_23"
